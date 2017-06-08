@@ -2,12 +2,10 @@
 
 namespace app\modules\nested_sets\controllers;
 
-
 use yii\web\Controller;
-use app\modules\nested_sets\models\NestedSets;
 
 /**
- * Default controller for the `NestedSets` module
+ * Default controller for the `nested_sets` module
  */
 class DefaultController extends Controller
 {

@@ -3,7 +3,7 @@
 namespace app\modules\materialized_path;
 
 /**
- * MaterializedPath module definition class
+ * materialized_path module definition class
  */
 class MaterializedPathModule extends \yii\base\Module
 {

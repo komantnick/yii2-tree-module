@@ -8,7 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-
+use app\models\Tree\Node;
+use app\models\User;
 class SiteController extends Controller
 {
     /**
@@ -60,66 +61,80 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        //Потестируем json_encode
+        //$this->layout = 'loginpage';
         return $this->render('index');
     }
+    public function actionLogin()
+    {        
+        $post=Yii::$app->request->post();
+        if ($post){
+            $username=$post['User']['username'];
+            $password=$post['User']['password'];        
+            $user = User::find()->where(['username' => $username, 'password' => $password])->one();       
+            if($user){    
+                    Yii::$app->user->login($user);                    
+                    $this->redirect('/cabinet/index');
+                }   
+            else{
+                $this->redirect('/site/index'); 
+            }    
+        } 
+        else{
+            $this->redirect('/site/index'); 
+        }   
+        // 
+    }
+
 
     /**
      * Login action.
      *
      * @return string
      */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    /*public function actionShowTree(){
+        $model=new \app\models\Tree\Node();
+        $model=$model->findOne(2);
+        print_r($model);
+        return $this->render('show-tree',['model'=>$model]);
+    }*/
+    /*public function actionTreeTest()
+    {   
+        $model=new \app\models\Tree\Node();
+        $tree=\app\models\Tree\Node::recoursiveTree(1,true);
+        echo json_encode($tree);
+        print_r($tree);
+        
+        return $this->render('tree-test',['model'=>$model]);
+    }*/
+   // public function actionJsonTest(){
+        /*$inner=array();
+        array_push($inner,array("name"=>"Node Two 1"));
+        array_push($inner,array("name"=>"Node Two 2"));
+        $array=array();
+        
+        array_push($array,array("name"=>"NodeOne","children"=>$inner));
+        array_push($array,array("name"=>"NodeTwo","children"=>$inner));
+        $a["name"]="root";
+        $a["children"]=$array;
+        echo json_encode($a);
+        echo "<hr>";
+        $inner[]=array("name"=>"Node Two 1");
+        $inner[]=array("name"=>"Node Two 2");
+        $arr["name"]="NodeOne";
+        $arr["children"]=$inner;
+        echo json_encode($arr);
+        //Тест перевода
+        
+        echo json_encode($tree);*/
+      //  $model=new \app\models\Tree\Node();
+      //  $model=$model->findOne(1);                
+        //$tree=$model->getJsonTree();
+      //  $model->formJsonFile();
+       // return $this->render("json-test");
+  //  }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
 
-        return $this->goHome();
-    }
 
-    /**
-     * Displays contact page.
-     *
-     * @return string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }

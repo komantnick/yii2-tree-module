@@ -3,7 +3,7 @@
 namespace app\modules\nested_sets;
 
 /**
- * NestedSets module definition class
+ * nested_sets module definition class
  */
 class NestedSetsModule extends \yii\base\Module
 {

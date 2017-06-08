@@ -3,9 +3,10 @@
 namespace app\modules\adjacency_list;
 
 /**
- * AdjacencyList module definition class
+ * adjacency_list module definition class
  */
-class AdjacencyListModule extends \yii\base\Module
+use \yii\base\Module as BaseModule;
+class AdjacencyListModule extends BaseModule
 {
     /**
      * @inheritdoc
@@ -18,7 +19,6 @@ class AdjacencyListModule extends \yii\base\Module
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
     }
 }

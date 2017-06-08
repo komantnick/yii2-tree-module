@@ -3,9 +3,10 @@
 namespace app\modules\closure_table;
 
 /**
- * ClosureTableModule module definition class
+ * adjacency_list module definition class
  */
-class ClosureTableModule extends \yii\base\Module
+use \yii\base\Module as BaseModule;
+class ClosureTableModule extends BaseModule
 {
     /**
      * @inheritdoc
@@ -18,7 +19,6 @@ class ClosureTableModule extends \yii\base\Module
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
     }
 }

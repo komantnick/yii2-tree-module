@@ -1,4 +1,4 @@
-<div class="AdjacencyList-default-index">
+<div class="adjacency_list-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".
@@ -10,3 +10,7 @@
         <code><?= __FILE__ ?></code>
     </p>
 </div>
+<?php 
+print_r($data);
+
+?>

@@ -47,20 +47,6 @@ $config = [
         ],
         */
     ],
-     'modules' => [
-        'adjacency_list' => [
-            'class' => 'app\modules\adjacency_list\AdjacencyListModule',
-        ],
-        'materialized_path' => [
-            'class' => 'app\modules\materialized_path\MaterializedPathModule',
-        ],
-        'nested_sets' => [
-            'class' => 'app\modules\nested_sets\NestedSetsModule',
-        ],
-        'closure_table' => [
-            'class' => 'app\modules\closure_table\ClosureTableModule',
-        ],
-       ],
     'params' => $params,
 ];
 
